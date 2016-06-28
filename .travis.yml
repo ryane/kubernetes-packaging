@@ -40,6 +40,8 @@ deploy:
   provider: script
   skip_cleanup: true
   script:
+    - docker pull hello-world
+    - docker tag hello-world ryane/hello-world-test:0.1
     - /bin/bash scripts/bintray.sh /tmp/out
     - cat scripts/images
     - <scripts/images | xargs -r -n1 docker images --format "{{.Repository}}:{{.Tag}}"

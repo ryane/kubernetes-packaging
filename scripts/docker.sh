@@ -4,6 +4,7 @@ set -ex
 
 docker pull hello-world
 docker tag hello-world ryane/hello-world-test:0.1
+docker version
 docker images
 cat scripts/images
 

@@ -37,14 +37,14 @@ before_deploy:
   - docker login -e="$DOCKER_EMAIL" -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
 
 deploy:
-  provider: script
-  skip_cleanup: true
-  script:
-    - docker pull hello-world
-    - docker tag hello-world ryane/hello-world-test:0.1
-    - /bin/bash scripts/bintray.sh /tmp/out
-    - cat scripts/images
-    - <scripts/images | xargs -r -n1 docker images --format "{{.Repository}}:{{.Tag}}"
-    - <scripts/images | xargs -r -n1 docker images --format "{{.Repository}}:{{.Tag}}" | xargs -r -n1 docker push
-  on:
-    branch: master
+  - provider: script
+    skip_cleanup: true
+    script:
+      - docker pull hello-world
+      - docker tag hello-world ryane/hello-world-test:0.1
+      - /bin/bash scripts/bintray.sh /tmp/out
+      - cat scripts/images
+      - <scripts/images | xargs -r -n1 docker images --format "{{.Repository}}:{{.Tag}}"
+      - <scripts/images | xargs -r -n1 docker images --format "{{.Repository}}:{{.Tag}}" | xargs -r -n1 docker push
+    on:
+      branch: master
